@@ -1,0 +1,89 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>World</groupId>
+  <artifactId>Hello</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  <properties>
+  	<java.version>1.8</java.version>
+	<pi.version>3.9.0</pi.version>
+	<mongodb.version>3.4.2</mongodb.version>
+	<swagger.version>2.5.0</swagger.version>
+  </properties>
+  
+  <parent>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-parent</artifactId>
+	<version>1.5.7.RELEASE</version>
+  </parent>
+  
+  <dependencies>
+  
+  	<dependency>
+	  <groupId>org.springframework.boot</groupId>
+	  <artifactId>spring-boot-starter-web</artifactId>
+	</dependency>
+	
+	<dependency>
+	  <groupId>org.springframework.boot</groupId>
+	  <artifactId>spring-boot-starter-data-rest</artifactId>
+	</dependency>
+	
+	<!-- PI Authentication -->
+	<dependency>
+	  <groupId>com.pearson.ed.ltg.piam</groupId>
+	  <artifactId>authentication-filter</artifactId>
+	  <version>${pi.version}</version>
+	  </dependency>
+
+	<!-- PI Authentication support library -->
+	<dependency>
+	  <groupId>com.pearson.ed.ltg.piam</groupId>
+	  <artifactId>encryption</artifactId>
+	  <version>${pi.version}</version>
+	</dependency>
+
+	<!-- PI Authentication support library -->
+	<dependency>
+	  <groupId>com.pearson.ed.ltg.piam</groupId>
+	  <artifactId>commons-external</artifactId>
+	  <version>${pi.version}</version>
+	</dependency>
+	
+	<dependency>
+	  <groupId>org.springframework.boot</groupId>
+	  <artifactId>spring-boot-starter-data-mongodb</artifactId>
+	  <exclusions>
+		<exclusion>
+		  <groupId>org.mongodb</groupId>
+		  <artifactId>mongo-java-driver</artifactId>
+	    </exclusion>
+	  </exclusions>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
+	<dependency>
+		<groupId>io.springfox</groupId>
+		<artifactId>springfox-swagger2</artifactId>
+		<version>${swagger.version}</version>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
+	<dependency>
+		<groupId>io.springfox</groupId>
+		<artifactId>springfox-swagger-ui</artifactId>
+		<version>${swagger.version}</version>
+	</dependency>
+	
+  </dependencies>
+  
+  <build>
+	<plugins>
+	  <plugin>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-maven-plugin</artifactId>
+	  </plugin>
+	</plugins>
+  </build>
+  
+</project>
