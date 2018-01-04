@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<!-- Ned appender to write to file -->
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<!-- Name of the file where the log messages are written -->
+		<file>/var/log/Hello/hello.log
+		</file>
+		<encoder>
+			<pattern>
+			<![CDATA[
+			
+			%date [%thread] %level %logger{72} [%file:%line] %replace(sId=%X{sId}){'[\s\S]*=( |$)', ''} %msg%n%rEx{20}
+			]]>
+			</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.pearson.course" level="INFO">
+		<appender-ref ref="FILE" />
+	</logger>
+	
+	<logger name="com.pearson.course" level="ERROR">
+		<appender-ref ref="FILE" />
+	</logger>
+
+	<root level="info"> <appender-ref ref="FILE" /> </root>
+<!-- %date [%thread] %level %logger{72} [%file:%line] %replace(sectionId=%X{sectionId}){'[\s\S]*=( |$)', ''} %msg%n%rEx{20} -->
+<!-- %d{HH:mm:ss.SSS} %contextName [${ENV}] [%X{CRID}] [%thread] %-5level %logger{5} [%X{URI}] - %msg%n%rEx{20} -->
+<!-- <root level="debug"> <appender-ref ref="FILE" /> </root> -->
+</configuration>

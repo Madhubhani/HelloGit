@@ -2,13 +2,13 @@ package com.helloRest.constant;
 
 public final class HeaderParameters {
 	
-    public static final String X_AUTHORIZATION = "X-Authorization";
+    public static final String AUTHENTICATION = "X-Authorization";
     
     public static final String AUTHORIZATION = "Authorization";
     
     //public static final String BEARER = "Bearer ";
 
-    //public static final String CORRELATIONID = "correlation-id";
+    public static final String CORRELATIONID = "correlation-id";
 
     public static final String PIID = "Piid";
 

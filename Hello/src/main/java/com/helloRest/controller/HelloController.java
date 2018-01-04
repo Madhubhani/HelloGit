@@ -19,8 +19,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.helloRest.constant.HeaderParameters;
 import com.helloRest.domain.Student;
 import com.helloRest.service.HelloService;
+
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/hello")
@@ -32,6 +39,14 @@ public class HelloController {
 	private HelloService hs;
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Create a record", notes = "Create a record")
+    @ApiResponses({ @ApiResponse(code = 201, message = "Successful creation of record"),
+	    @ApiResponse(code = 400, message = "Bad Request, validation error"),
+	    @ApiResponse(code = 401, message = "Cannot find a valid token in X-Authorization header"),
+	    @ApiResponse(code = 404, message = "Resource not Found"),
+	    @ApiResponse(code = 409, message = "Trying to add duplicate") })
+	@ApiImplicitParam(name = HeaderParameters.AUTHENTICATION, value = "PI Token for authentication", required = true, dataType = "string", paramType = "header")
+	
     @ResponseStatus(HttpStatus.CREATED)
     Student create(@RequestBody @Valid Student student) {
     	logger.info("Creating a new entry with information: {}", student);
@@ -44,6 +59,12 @@ public class HelloController {
 	
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Display all the records", notes = "Get the records")
+    @ApiResponses({ @ApiResponse(code = 200, message = "Successful display the records"),
+	    @ApiResponse(code = 400, message = "Bad Request, validation error"),
+	    @ApiResponse(code = 401, message = "Cannot find a valid token in X-Authorization header"),
+	    @ApiResponse(code = 404, message = "Resource not Found")})
+	@ApiImplicitParam(name = HeaderParameters.AUTHENTICATION, value = "PI Token for authentication", required = true, dataType = "string", paramType = "header")
     List<Student> findAll() {
     	logger.info("Finding all entries");
 
@@ -57,6 +78,12 @@ public class HelloController {
 //	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Display a record", notes = "Get a record")
+    @ApiResponses({ @ApiResponse(code = 200, message = "Successful display of a record"),
+	    @ApiResponse(code = 400, message = "Bad Request, validation error"),
+	    @ApiResponse(code = 401, message = "Cannot find a valid token in X-Authorization header"),
+	    @ApiResponse(code = 404, message = "Resource not Found")})
+	@ApiImplicitParam(name = HeaderParameters.AUTHENTICATION, value = "PI Token for authentication", required = true, dataType = "string", paramType = "header")
 	@ResponseStatus(HttpStatus.OK)
     public Student getStudentById(@PathVariable("id") String sId) {
 	
@@ -69,7 +96,14 @@ public class HelloController {
     }
 	
 	@ResponseBody
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Delete a record", notes = "Delete a student")
+    @ApiResponses({ @ApiResponse(code = 204, message = "Successful deletion of record"),
+	    @ApiResponse(code = 400, message = "Bad Request, validation error"),
+	    @ApiResponse(code = 401, message = "Cannot find a valid token in X-Authorization header"),
+	    @ApiResponse(code = 404, message = "Resource not Found")})
+	@ApiImplicitParam(name = HeaderParameters.AUTHENTICATION, value = "PI Token for authentication", required = true, dataType = "string", paramType = "header")
+	
 	public Student deleteOne(@PathVariable("id") String sId) {
     	logger.info("Deleting one entry");
 
@@ -80,6 +114,12 @@ public class HelloController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Update a record", notes = "Update a student")
+    @ApiResponses({ @ApiResponse(code = 200, message = "Successfully updated the record"),
+	    @ApiResponse(code = 400, message = "Bad Request, validation error"),
+	    @ApiResponse(code = 401, message = "Cannot find a valid token in X-Authorization header"),
+	    @ApiResponse(code = 404, message = "Resource not Found")})
+	@ApiImplicitParam(name = HeaderParameters.AUTHENTICATION, value = "PI Token for authentication", required = true, dataType = "string", paramType = "header")
 	public Student updateOne(@RequestBody @Valid Student student, @PathVariable("id") String sId) {
 		
     	logger.info("Updating an entry (controller)");

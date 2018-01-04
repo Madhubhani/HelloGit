@@ -36,7 +36,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-	String authenticationToken = request.getHeader(HeaderParameters.X_AUTHORIZATION);
+	String authenticationToken = request.getHeader(HeaderParameters.AUTHENTICATION);
 
 	if (authenticationToken != null && !StringUtils.isBlank(authenticationToken.trim())) {
 
