@@ -16,16 +16,18 @@
 		</encoder>
 	</appender>
 
-	<logger name="com.pearson.course" level="INFO">
+	<logger name="com.helloRest" level="info">
 		<appender-ref ref="FILE" />
 	</logger>
 	
-	<logger name="com.pearson.course" level="ERROR">
+	<logger name="org.springframework.web" level="error">
 		<appender-ref ref="FILE" />
 	</logger>
 
-	<root level="info"> <appender-ref ref="FILE" /> </root>
+	<!-- <root level="info"> <appender-ref ref="FILE" /> </root> -->
+	
 <!-- %date [%thread] %level %logger{72} [%file:%line] %replace(sectionId=%X{sectionId}){'[\s\S]*=( |$)', ''} %msg%n%rEx{20} -->
 <!-- %d{HH:mm:ss.SSS} %contextName [${ENV}] [%X{CRID}] [%thread] %-5level %logger{5} [%X{URI}] - %msg%n%rEx{20} -->
 <!-- <root level="debug"> <appender-ref ref="FILE" /> </root> -->
+
 </configuration>
