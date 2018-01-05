@@ -75,7 +75,7 @@ public class HelloService {
 	public List<Student> deleteAll() {
 		logger.info("Finding all entries.");
 
-        List<Student> stu = repo.removeAll();//
+        List<Student> stu = repo.removeAll();
 
         return stu;
 	}
