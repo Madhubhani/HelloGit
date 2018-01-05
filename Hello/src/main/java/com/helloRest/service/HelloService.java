@@ -5,6 +5,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +30,7 @@ public class HelloService {
 		return "Hello World";
 	}
 	
+//	@Cacheable(value = "Student", key = "#student")
 	public Student save(Student student) {
 		logger.info("Creating a new entry with information: {}", student);
 		
@@ -54,21 +58,24 @@ public class HelloService {
         return stu;
 	}
 	
+
+//	@CacheEvict(value="Student", allEntries=true)	
 	public Student findById(String sId) {
 		logger.info("Finding entry with id: {}", sId);
 
 		Student idFromCache = repo.findFromCache(sId);
 
 		if (idFromCache != null) {
-			
-			 logger.info("Getting from cache");
-			 
+
+			logger.info("Getting from cache");
 			return idFromCache;
+			
 		} else {
-	
-			 logger.info("Getting from DB");
+
+			logger.info("Getting from DB");
 			Student found = repo.findById(sId);
 			return found;
+			
 		}
 	}
 	
@@ -83,7 +90,7 @@ public class HelloService {
 	public Student removeOne(String id) {
 		logger.info("Removing one entry.");
 
-        Student stu = repo.removeById(id);//
+        Student stu = repo.removeById(id);
 
         return stu;
 	}

@@ -43,10 +43,6 @@ public class TestRepository <T extends Student, I extends Serializable> {
     private void init() {
         hashOps = redisTemplate.opsForHash();
     }
-     
-//    public void saveStudent(Student student) {
-//        hashOps.put(KEY, student.getsId(), student);
-//    }
     
     public void saveStudent(Student student) {
 
