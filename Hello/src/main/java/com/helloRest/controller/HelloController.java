@@ -7,10 +7,8 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +35,7 @@ public class HelloController {
 	@Autowired
 	private HelloService hs;
 	
-	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/new", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Create a record", notes = "Create a record")
     @ApiResponses({ @ApiResponse(code = 201, message = "Successful creation of record"),
 	    @ApiResponse(code = 400, message = "Bad Request, validation error"),
@@ -57,7 +55,7 @@ public class HelloController {
     }
 	
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/view_all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Display all the records", notes = "Get the records")
     @ApiResponses({ @ApiResponse(code = 200, message = "Successful display the records"),
 	    @ApiResponse(code = 400, message = "Bad Request, validation error"),
@@ -76,7 +74,7 @@ public class HelloController {
 //		return hs.displayContent();
 //	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Display a record", notes = "Get a record")
     @ApiResponses({ @ApiResponse(code = 200, message = "Successful display of a record"),
 	    @ApiResponse(code = 400, message = "Bad Request, validation error"),
@@ -95,7 +93,7 @@ public class HelloController {
     }
 	
 	@ResponseBody
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Delete a record", notes = "Delete a student")
     @ApiResponses({ @ApiResponse(code = 204, message = "Successful deletion of record"),
 	    @ApiResponse(code = 400, message = "Bad Request, validation error"),
@@ -112,7 +110,7 @@ public class HelloController {
     }
 	
 	@ResponseBody
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/update/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Update a record", notes = "Update a student")
     @ApiResponses({ @ApiResponse(code = 200, message = "Successfully updated the record"),
 	    @ApiResponse(code = 400, message = "Bad Request, validation error"),

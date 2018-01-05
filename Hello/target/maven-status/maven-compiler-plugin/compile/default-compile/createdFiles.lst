@@ -1,8 +1,6 @@
 com\helloRest\exception\ValidationException.class
 com\helloRest\exception\NotFoundException.class
 com\helloRest\exception\BadRequestException.class
-com\helloRest\repository\ObjRepository.class
-com\helloRest\repository\HelloRepository.class
 com\helloRest\config\SwaggerConfig.class
 com\helloRest\exception\BaseException.class
 com\helloRest\domain\Student.class

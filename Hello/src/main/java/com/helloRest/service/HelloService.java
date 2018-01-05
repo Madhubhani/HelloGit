@@ -5,16 +5,10 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Component;
 
 import com.helloRest.controller.HelloController;
 import com.helloRest.domain.Student;
-import com.helloRest.exception.InternalErrorException;
-import com.helloRest.repository.ObjRepository;
 import com.helloRest.repository.TestRepository;
 
 @Component
