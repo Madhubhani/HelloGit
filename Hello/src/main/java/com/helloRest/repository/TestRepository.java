@@ -1,7 +1,12 @@
 package com.helloRest.repository;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +16,8 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.repository.query.MongoEntityInformation;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.helloRest.constant.Constant;
@@ -22,6 +29,46 @@ import com.helloRest.exception.NotFoundException;
 @Repository("repo")
 public class TestRepository <T extends Student, I extends Serializable> {
 	
+	private static final String KEY = "Student";
+	
+	private RedisTemplate<List<String>, Student> redisTemplate;
+	private HashOperations hashOps;
+	
+	@Autowired
+    private TestRepository(RedisTemplate redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
+	
+	@PostConstruct
+    private void init() {
+        hashOps = redisTemplate.opsForHash();
+    }
+     
+//    public void saveStudent(Student student) {
+//        hashOps.put(KEY, student.getsId(), student);
+//    }
+    
+    public void saveStudent(Student student) {
+
+        List<String> list = new ArrayList<String>();
+        list.add(student.getsId());
+
+        redisTemplate.opsForValue().set(list, student);
+
+        redisTemplate.expire(list, 300, TimeUnit.SECONDS);
+        logger.info("Saved to cache");
+    }
+    
+    public Student findFromCache(String id) {
+
+        List<String> list = new ArrayList<String>();
+        
+        list.add(id);
+        
+        return redisTemplate.opsForValue().get(list);
+        
+    }
+    
 	@Autowired
 	private MongoOperations mongoOperations;
 
@@ -47,12 +94,6 @@ public class TestRepository <T extends Student, I extends Serializable> {
 	}
 	
 	public List<T> findAll() {
-
-//		Query query = new Query();
-//		List<Student> list = null;
-//		
-//		logger.info("Get all students");
-//		list = this.mongoOperations.find(query, Student.class);
 
 		logger.info("Finding all the entries");
 

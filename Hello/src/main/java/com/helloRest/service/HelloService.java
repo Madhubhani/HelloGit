@@ -32,13 +32,14 @@ public class HelloService {
 		
 		Student stu = new Student();
 		
-		//stu.setsId(student.getsId());
+		stu.setsId(student.getsId());
 		stu.setsName(student.getsName());
 		stu.setAge(student.getAge());
 		stu.setDistrict(student.getDistrict());
 		stu.setCountry(student.getCountry());
 		
 		repo.save(stu);
+		repo.saveStudent(stu);
 		
 		return student;
 	}
@@ -56,11 +57,19 @@ public class HelloService {
 	public Student findById(String sId) {
 		logger.info("Finding entry with id: {}", sId);
 
-		Student found = repo.findById(sId);
+		Student idFromCache = repo.findFromCache(sId);
 
-        logger.info("Found entry: {}", found);
-
-        return found;
+		if (idFromCache != null) {
+			
+			 logger.info("Getting from cache");
+			 
+			return idFromCache;
+		} else {
+	
+			 logger.info("Getting from DB");
+			Student found = repo.findById(sId);
+			return found;
+		}
 	}
 	
 	public List<Student> deleteAll() {
