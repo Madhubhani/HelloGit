@@ -49,7 +49,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 		LOGGER.info("Requested Pi Id: {} Request Path {}", piId, request.getRequestURI());
 
 		return true;
-
+		
 	    }
 
 	}

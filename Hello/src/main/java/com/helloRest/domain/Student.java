@@ -2,6 +2,8 @@ package com.helloRest.domain;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -18,7 +20,10 @@ public final class Student extends BaseDomain implements Domain, Serializable {
 
 	@Id
 	private String sId;
+	
+	@NotNull(message = "Student Name is compulsory")
 	private String sName;
+	
 	private int age;
 	private String district;
 	private String country;

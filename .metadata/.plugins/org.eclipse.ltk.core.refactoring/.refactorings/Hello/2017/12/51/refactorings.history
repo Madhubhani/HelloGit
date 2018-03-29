@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Extract local variable &apos;remove&apos; from expression &apos;(List&lt;Student&gt;)this.mongoOperations.remove(query,Student.class)&apos;&#x0D;&#x0A;- Original project: &apos;Hello&apos;&#x0D;&#x0A;- Variable name: &apos;remove&apos;&#x0D;&#x0A;- Destination method: &apos;com.helloRest.repository.TestRepository.removeAll()&apos;&#x0D;&#x0A;- Variable expression: &apos;(List&lt;Student&gt;)this.mongoOperations.remove(query,Student.class)&apos;&#x0D;&#x0A;- Replace occurrences of expression with variable" description="Extract local variable &apos;remove&apos;" final="false" id="org.eclipse.jdt.ui.extract.temp" input="/src\/main\/java&lt;com.helloRest.repository{TestRepository.java" name="remove" replace="true" selection="2325 65" stamp="1513914227923" version="1.0"/>
+</session>
